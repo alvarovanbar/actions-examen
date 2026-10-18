@@ -23,6 +23,12 @@ jobs:
       - name: Empaquetem
         run: pyinstaller --onefile comprova_desplegaments.py
 
+      - name: Guardem l'executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: executable-linux
+          path: dist/comprova_desplegaments
+
   build-macos:
     runs-on: macos-latest
     steps:
@@ -56,3 +62,18 @@ jobs:
 
       - name: Empaquetem
         run: pyinstaller --onefile comprova_desplegaments.py
+
+  comprova:
+    needs: build-linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descarreguem l'executable
+        uses: actions/download-artifact@v4
+        with:
+          name: executable-linux
+
+      - name: Donem permisos d'execució
+        run: chmod +x comprova_desplegaments
+
+      - name: Executem la comprovació
+        run: ./comprova_desplegaments example.com

@@ -22,3 +22,37 @@ jobs:
 
       - name: Empaquetem
         run: pyinstaller --onefile comprova_desplegaments.py
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout del repo
+        uses: actions/checkout@v4
+
+      - name: Configurem Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalem pyinstaller
+        run: pip install pyinstaller
+
+      - name: Empaquetem
+        run: pyinstaller --onefile comprova_desplegaments.py
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout del repo
+        uses: actions/checkout@v4
+
+      - name: Configurem Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalem pyinstaller
+        run: pip install pyinstaller
+
+      - name: Empaquetem
+        run: pyinstaller --onefile comprova_desplegaments.py

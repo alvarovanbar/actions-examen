@@ -1,0 +1,24 @@
+name: Empaquetat
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repo
+        uses: actions/checkout@v4
+
+      - name: Configurem Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalem pyinstaller
+        run: pip install pyinstaller
+
+      - name: Empaquetem
+        run: pyinstaller --onefile comprova_desplegaments.py
